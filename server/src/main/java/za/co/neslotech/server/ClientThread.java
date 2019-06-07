@@ -35,11 +35,15 @@ public class ClientThread extends Thread {
 
                 System.out.println("From Client - " + clientId + ": Request is: " + clientMessage);
 
-                try {
-                    serverMessage = calculator.execute(clientMessage);
-                } catch (CalculationException | ReflectiveOperationException e) {
-                    System.err.println("An error occurred when performing the calculation: " + e.getMessage());
-                    serverMessage = "Failed to perform the calculation. " + e.getMessage();
+                if (!"close".equals(clientMessage)) {
+                    try {
+                        serverMessage = calculator.execute(clientMessage);
+                    } catch (CalculationException | ReflectiveOperationException e) {
+                        System.err.println("An error occurred when performing the calculation: " + e.getMessage());
+                        serverMessage = "Failed to perform the calculation. " + e.getMessage();
+                    }
+                } else {
+                    serverMessage = clientMessage;
                 }
 
                 outStream.writeUTF(serverMessage);

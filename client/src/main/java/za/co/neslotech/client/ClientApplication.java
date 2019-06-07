@@ -22,15 +22,19 @@ public class ClientApplication {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String clientMessage = "", serverMessage;
             while (!"close".equals(clientMessage)) {
-                System.out.println("Waiting for command.");
-                clientMessage = performInputSanityCheck(br.readLine());
-                System.out.println("Request from client: " + clientMessage);
+                try {
+                    System.out.println("Waiting for command.");
+                    clientMessage = performInputSanityCheck(br.readLine());
+                    System.out.println("Request from client: " + clientMessage);
 
-                out.writeUTF(clientMessage);
-                out.flush();
+                    out.writeUTF(clientMessage);
+                    out.flush();
 
-                serverMessage = in.readUTF();
-                System.out.println("Response from server: " + serverMessage);
+                    serverMessage = in.readUTF();
+                    System.out.println("Response from server: " + serverMessage);
+                } catch (InvalidCommandException e) {
+                    System.err.println("The command supplied is empty. Please send a command!");
+                }
             }
 
             out.close();
@@ -48,7 +52,6 @@ public class ClientApplication {
 
     private static String performInputSanityCheck(final String inputString) throws InvalidCommandException {
         if (inputString == null || "".equals(inputString)) {
-            System.err.println("The command supplied is empty. Please send a command!");
             throw new InvalidCommandException("Illegal command issued.");
         }
 
