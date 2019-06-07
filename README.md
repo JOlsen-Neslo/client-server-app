@@ -34,6 +34,6 @@ $ (1+1)*(4+4)
 
 
 $ ((2+2) * 2) + 4
-// expected result: 18
+// expected result: 12
 
 ```
