@@ -10,8 +10,8 @@
     <description>Client and Server application</description>
 
     <properties>
-        <maven.comiler.source>8</maven.comiler.source>
-        <maven.comiler.target>8</maven.comiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <modules>
