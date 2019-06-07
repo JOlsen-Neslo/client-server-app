@@ -9,6 +9,11 @@
     <name>client-server-app</name>
     <description>Client and Server application</description>
 
+    <properties>
+        <maven.comiler.source>8</maven.comiler.source>
+        <maven.comiler.target>8</maven.comiler.target>
+    </properties>
+
     <modules>
         <module>client</module>
         <module>server</module>
