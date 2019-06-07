@@ -14,12 +14,6 @@ public class ClientApplication {
         int port = 8888;
 
         try {
-            // TODO: implement SSL
-//            SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-//            SSLSocket socket = (SSLSocket) socketFactory
-//                    .createSocket(host, port);
-//            socket.startHandshake();
-
             Socket socket = new Socket(host, port);
 
             DataInputStream in = new DataInputStream(socket.getInputStream());

@@ -8,9 +8,6 @@ public class ServerApplication {
 
     public static void main(String[] args) {
         try {
-            // TODO: implement SSL
-//            SSLServerSocketFactory serverSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-//            SSLServerSocket serverSocket = (SSLServerSocket) serverSocketFactory.createServerSocket(8888);
             ServerSocketFactory serverSocketFactory = ServerSocketFactory.getDefault();
             ServerSocket serverSocket = serverSocketFactory.createServerSocket(8888);
 
@@ -18,11 +15,9 @@ public class ServerApplication {
             System.out.println("Server started");
             while (true) {
                 counter++;
-//                SSLSocket serverClient = (SSLSocket) serverSocket.accept();
-//                serverClient.setEnabledCipherSuites(serverClient.getSupportedCipherSuites());
+
                 Socket serverClient = serverSocket.accept();
                 serverClient.setSoTimeout(60 * 1000); //setting the soTimeout will disconnect the client after 60 seconds of inactivity
-//                serverClient.startHandshake();
 
                 System.out.println("Establishing connection: " + counter);
 
@@ -30,7 +25,8 @@ public class ServerApplication {
                 clientThread.start();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("A fatal error has occured! " + e.getMessage());
+            System.exit(1);
         }
     }
 
